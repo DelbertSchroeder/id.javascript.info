@@ -1,0 +1,24 @@
+<script>
+  async function* fetchCommits(repo) {
+    let url = `https://api.github.com/repos/${repo}/commits`;
+
+    while (url) {
+      const response = await fetch(url, {
+        headers: { 'User-Agent': 'Our script' }, // github membutuhkan header user-agent
+      });
+
+      const body = await response.json(); // mem-parsing respons sebagai JSON (senarai commits)
+
+      // URL halaman berikutnya ada di header, ekstrak itu
+      let nextPage = response.headers.get('Link').match(/<(.*?)>; rel="next"/);
+      nextPage = nextPage?.[1];
+
+      url = nextPage;
+
+      // menghasilkan commit satu per satu, setelah selesai - ambil url halaman baru
+      for (let commit of body) {
+        yield commit;
+      }
+    }
+  }
+</script>

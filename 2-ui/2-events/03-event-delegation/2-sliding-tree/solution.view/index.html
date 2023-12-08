@@ -1,0 +1,80 @@
+<!DOCTYPE HTML>
+<html>
+
+<head>
+  <style>
+    .tree span:hover {
+      font-weight: bold;
+    }
+
+    .tree span {
+      cursor: pointer;
+    }
+  </style>
+  <meta charset="utf-8">
+</head>
+
+<body>
+
+  <ul class="tree" id="tree">
+    <li>Hewan
+      <ul>
+        <li>Mamalia
+          <ul>
+            <li>Sapi</li>
+            <li>Keledai</li>
+            <li>Anjing</li>
+            <li>Harimau</li>
+          </ul>
+        </li>
+        <li>Lain
+          <ul>
+            <li>Ular</li>
+            <li>Burung</li>
+            <li>Kadal</li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+    <li>Ikan
+      <ul>
+        <li>Akuarium
+          <ul>
+            <li>Gupi (ikan seribu)</li>
+            <li>Ikan bidadari</li>
+          </ul>
+        </li>
+        <li>Laut
+          <ul>
+            <li>Trout laut</li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+  </ul>
+
+  <script>
+    // pindahkan semua teks kedalam <span>
+    // mereka menempati tempat yang tepat diperlukan untuk teks,
+    for (let li of tree.querySelectorAll('li')) {
+      let span = document.createElement('span');
+      li.prepend(span);
+      span.append(span.nextSibling); // memindahkan node teks ke dalam span
+    }
+
+    // tangkap klik pada keseluruhan pohon (tree)
+    tree.onclick = function(event) {
+
+      if (event.target.tagName != 'SPAN') {
+        return;
+      }
+
+      let childrenContainer = event.target.parentNode.querySelector('ul');
+      if (!childrenContainer) return; // tidak ada elemen bawah
+
+      childrenContainer.hidden = !childrenContainer.hidden;
+    }
+  </script>
+
+</body>
+</html>

@@ -1,0 +1,40 @@
+<!DOCTYPE HTML>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <style>
+    #contents {
+      padding: 5px;
+      border: 1px green solid;
+    }
+  </style>
+</head>
+
+<body>
+
+  <fieldset id="contents">
+    <legend>#kontent</legend>
+    <p>
+      Bagaimana jika membaca di <a href="https://wikipedia.org">Wikipedia</a> atau kunjungi <a href="https://w3.org"><i>W3.org</i></a> dan belajar tentang standar terbaru?
+    </p>
+  </fieldset>
+
+  <script>
+    contents.onclick = function(event) {
+
+      function handleLink(href) {
+        let isLeaving = confirm(`Pergi ke ${href}?`);
+        if (!isLeaving) return false;
+      }
+
+      let target = event.target.closest('a');
+
+      if (target && contents.contains(target)) {
+        return handleLink(target.getAttribute('href'));
+      }
+    };
+  </script>
+  
+</body>
+</html>

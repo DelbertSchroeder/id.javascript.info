@@ -1,0 +1,1 @@
+Lakukanlah perulangan pada objek dan segera `return false` jika ada setidaknya satu properti
